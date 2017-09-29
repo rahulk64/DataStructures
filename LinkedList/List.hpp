@@ -13,8 +13,8 @@ public:
 
   void printList();
   bool makeEmpty();
+  bool insert(int pos, Node* n);
   Node* find(int val);
-  bool insert(Node* n);
   Node* remove(int val);
   Node* findAtIndex(int index);
   Node* removeAtIndex(int index);
