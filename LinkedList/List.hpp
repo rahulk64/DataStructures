@@ -9,6 +9,7 @@ public:
   List(int num = 0, int arr[] = { });
 
   Node* getHead();
+  bool setHead(Node* first);
 
   void printList();
   bool makeEmpty();
