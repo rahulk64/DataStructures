@@ -3,7 +3,8 @@
 
 class Node {
 public:
-  Node(int v = 0, Node* n = NULL);
+  Node(int v = 0);
+  Node(int v, Node* n);
 
   int getValue();
   void setValue(int v);

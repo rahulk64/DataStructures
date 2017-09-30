@@ -5,11 +5,12 @@
 
 class List {
 public:
+  List();
   List(int val);
-  List(int num = 0, int arr[] = { });
+  List(int num, int arr[]);
 
   Node* getHead();
-  bool setHead(Node* first);
+  void setHead(Node* first);
 
   void printList();
   bool makeEmpty();

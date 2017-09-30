@@ -1,6 +1,11 @@
 #include "Node.hpp"
 
-Node::Node(int v = 0, Node* n = NULL) {
+Node::Node(int v) {
+  val = v;
+  next = nullptr;
+}
+
+Node::Node(int v, Node* n) {
   val = v;
   next = n;
 }
