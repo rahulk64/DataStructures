@@ -8,21 +8,21 @@ List::List() {
 }
 
 List::List(int val) {
-  Node first(val);
-  head = &first;
+  Node* first = new Node(val);
+  head = first;
 }
 
-List::List(int num, int arr[]) {
-  if(num == 0) {
+List::List(int size, int arr[]) {
+  if(size == 0) {
     head = nullptr;
-    return;
-  }
-
-  Node current(arr[0]);
-  for(int i = 1; i < num; i++) {
-    Node temp(arr[i]);
-    current.setNext(&temp);
-    current = *(current.getNext());
+  } else {
+    Node* current = new Node(arr[0]);
+    head = current;
+    for(int i = 1; i < size; i++) {
+      Node* temp = new Node(arr[i]);
+      current->setNext(temp);
+      current = current->getNext();
+    }
   }
 }
 
@@ -36,33 +36,45 @@ void List::setHead(Node* first) {
 
 void List::printList() {
   Node* curr = head;
-  if(curr == nullptr) {
-    cout << "Empty List" << endl;
-    return;
+  if(curr == NULL) {
+    cout << "(Empty List)" << endl;
+  } else {
+    cout << "HEAD";
+    while(curr !=NULL) {
+      cout << "-> " << curr->getValue();
+      curr = curr->getNext();
+    }
+    cout << endl;
   }
-
-  while(curr !=nullptr) {
-    cout << curr->getValue() << ", ";
-    curr = curr->getNext();
-  }
-  cout << endl;
 }
 
-bool List::makeEmpty() {
+void List::makeEmpty() {
   Node* curr = head;
-  Node* next = curr->getNext();
-  while(curr != nullptr) {
+  Node* temp;
+  while(curr != NULL) {
+    temp = curr->getNext();
     delete curr;
-    curr = next;
-    next = curr->getNext();
+    curr = temp;
   }
 
-  head = nullptr;
+  head = NULL;
 }
 
 bool List::insert(int pos, Node* n) {
+  pos--;
+  if(pos < 0) {
+    return false;
+  }
+
+  if(pos == 0) {
+    n->setNext(head);
+    head = n;
+
+    return true;
+  }
+
   Node* insertAfter = head;
-  for(int i = 0; i < pos; i++) {
+  for(int i = 1; i < pos; i++) {
     if(insertAfter == nullptr) {
       return false;
     }
@@ -75,6 +87,49 @@ bool List::insert(int pos, Node* n) {
   n->setNext(insertBefore);
 
   return true;
+}
+
+bool List::insert(int pos, int val) {
+  pos--;
+
+  if(pos < 0) {
+    return false;
+  }
+
+  if(pos == 0) {
+    Node* n = new Node(val);
+
+    n->setNext(head);
+    head = n;
+
+    return true;
+  }
+
+  Node* insertAfter = head;
+
+  for(int i = 1; i < pos; i++) {
+    if(insertAfter == nullptr) {
+      return false;
+    }
+
+    insertAfter = insertAfter->getNext();
+  }
+
+  Node* n = new Node(val);
+
+  Node* insertBefore = insertAfter->getNext();
+  insertAfter->setNext(n);
+  n->setNext(insertBefore);
+
+  return true;
+}
+
+bool List::insertBeginning(Node* n) {
+  return insert(1, n);
+}
+
+bool List::insertBeginning(int val) {
+  return insert(1, val);
 }
 
 Node* List::find(int val) {
@@ -108,7 +163,7 @@ Node* List::findAtIndex(int index) {
     return nullptr;
   }
 
-  for(int i = 0; i < index; i++) {
+  for(int i = 1; i < index; i++) {
     curr = curr->getNext();
     if(curr == nullptr) {
       return nullptr;
@@ -118,11 +173,24 @@ Node* List::findAtIndex(int index) {
   return curr;
 }
 
+Node* List::findAtPosition(int pos) {
+  return findAtIndex(pos-1);
+}
+
 Node* List::removeAtIndex(int index) {
   Node* curr = head;
   Node* next;
+  Node* toReturn;
 
-  for(int i = 0; i < index; i++) {
+  if(index == 0) {
+    next = curr->getNext();
+    toReturn = next;
+    delete curr;
+    head = next;
+    return toReturn;
+  }
+
+  for(int i = 1; i < index; i++) {
     curr = curr->getNext();
     if(curr == nullptr) {
       return nullptr;
@@ -130,6 +198,7 @@ Node* List::removeAtIndex(int index) {
   }
 
   next = curr->getNext();
+  toReturn = next;
   if(next == nullptr) {
     curr->setNext(nullptr);
     delete next;
@@ -138,5 +207,9 @@ Node* List::removeAtIndex(int index) {
     delete next;
   }
 
-  return next;
+  return toReturn;
+}
+
+Node* List::removeAtPosition(int pos) {
+  return removeAtIndex(pos-1);
 }
