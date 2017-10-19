@@ -7,6 +7,11 @@ List::List() {
   head = nullptr;
 }
 
+List::~List() {
+  makeEmpty();
+  delete head;
+}
+
 List::List(int val) {
   Node* first = new Node(val);
   head = first;

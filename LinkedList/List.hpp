@@ -6,6 +6,7 @@
 class List {
 public:
   List();
+  ~List();
   List(int val);
   List(int size, int arr[]);
 
