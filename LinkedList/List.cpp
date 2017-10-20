@@ -39,9 +39,17 @@ void List::setHead(Node* first) {
   head = first;
 }
 
+bool List::isEmpty() {
+  if(head == NULL) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 void List::printList() {
   Node* curr = head;
-  if(curr == NULL) {
+  if(isEmpty()) {
     cout << "(Empty List)" << endl;
   } else {
     cout << "HEAD";

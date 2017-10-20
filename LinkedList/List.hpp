@@ -13,6 +13,7 @@ public:
   Node* getHead();
   void setHead(Node* first);
 
+  bool isEmpty();
   void printList();
   void makeEmpty();
   bool insert(int pos, Node* n);
