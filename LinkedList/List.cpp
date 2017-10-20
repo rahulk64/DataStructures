@@ -145,6 +145,17 @@ bool List::insertBeginning(int val) {
   return insert(1, val);
 }
 
+int List::getSize() {
+  Node* curr = head;
+  int size = 0;
+  while(curr != NULL) {
+    curr = curr->getNext();
+    size++;
+  }
+
+  return size;
+}
+
 Node* List::find(int val) {
   Node* curr = head;
   while(curr!= nullptr) {

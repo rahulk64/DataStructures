@@ -20,6 +20,7 @@ public:
   bool insert(int pos, int val);
   bool insertBeginning(Node* n);
   bool insertBeginning(int val);
+  int getSize();
   Node* find(int val);
   Node* remove(int val);
   Node* findAtIndex(int index);
