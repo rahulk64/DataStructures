@@ -18,6 +18,9 @@ List::List(int val) {
 }
 
 List::List(int size, int arr[]) {
+  int sizeTest = *(&arr + 1) - arr;
+  assert(size == sizeTest);
+  
   if(size == 0) {
     head = nullptr;
   } else {
