@@ -13,9 +13,6 @@ StackArray::StackArray(int num) {
 }
 
 StackArray::StackArray(int size, int arr[]) {
-  int sizeTest = *(&arr + 1) - arr;
-  assert(size == sizeTest);
-
   for(int i = 0; i < size; i++) {
     array.push_back(arr[i]);
   }
@@ -23,6 +20,18 @@ StackArray::StackArray(int size, int arr[]) {
 
 bool StackArray::isEmpty() {
   return array.empty();
+}
+
+void StackArray::printStack() {
+  if(isEmpty()) {
+    cout << "(empty stack)" << endl;
+  } else {
+    cout << "Bottom-> " << array.at(0);
+    for(int i = 1; i < array.size(); i++) {
+      cout << ", " << array.at(i);
+    }
+    cout << " <-Top" << endl;
+  }
 }
 
 bool StackArray::push(int item) {

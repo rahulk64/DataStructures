@@ -11,6 +11,7 @@ public:
   StackArray(int size, int arr[]);
 
   bool isEmpty();
+  void printStack();
   bool push(int item);
   int getStackSize();
   int pop();
