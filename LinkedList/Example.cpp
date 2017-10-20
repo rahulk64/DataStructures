@@ -28,6 +28,9 @@ int main() {
   list1.insert(3, newNode2);
   list1.printList();
 
+  cout << "Getting size of Linked List: ";
+  cout << "size = " << list1.getSize() << endl;
+
   cout << "Removing value 8" << endl;
   list1.remove(8);
   list1.printList();
